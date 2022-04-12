@@ -46,15 +46,18 @@ public class TestWeb {
             System.out.println("Home Page Failed To Load");
             driver.quit();
         }
+
         freeBitcoin.click();
+
         String url = driver.getCurrentUrl();
         if (url.equalsIgnoreCase(freeBitcoinUrl)) {
             System.out.println("You Were Redirected To Free Bitcoin!");
         } else {
             System.out.println("You Were Not Redirected");
         }
-        WebElement download = driver.findElement(By.xpath("//*[@class='cretive-button-text']"));
-        download.click();
+
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@class='cretive-button-text']")))).click();
+
         WebElement qrCode = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@alt='qr code']"))));
         if (qrCode.isDisplayed()){
             testQRcode(qrCode);
@@ -64,6 +67,7 @@ public class TestWeb {
             System.out.println("QR Popup Is Not Displayed");
             driver.quit();
         }
+
         Thread.sleep(5000);
         driver.quit();
     }
