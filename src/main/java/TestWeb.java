@@ -34,7 +34,7 @@ public class TestWeb {
     public static void main(String[] args) throws InterruptedException, NotFoundException, IOException {
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         driver.get("https://www.zengo.com/");
         String freeBitcoinUrl = "https://zengo.com/free-bitcoin/";
         WebElement homePage = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("page")));
