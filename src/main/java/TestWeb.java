@@ -2,6 +2,7 @@ import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,6 +16,11 @@ import java.net.URL;
 import java.time.Duration;
 
 public class TestWeb {
+    public static boolean isSiteLoaded(WebDriver driver){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return js.executeScript("return document.readyState").toString().equalsIgnoreCase("complete");
+    }
+
     public static void testQRcode(WebElement driver) throws IOException, NotFoundException {
         String imgURLText = driver.getAttribute("src");
         URL imgURL = new URL(imgURLText);
@@ -37,10 +43,9 @@ public class TestWeb {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         driver.get("https://www.zengo.com/");
         String freeBitcoinUrl = "https://zengo.com/free-bitcoin/";
-        WebElement homePage = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("page")));
         WebElement freeBitcoin = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("menu-item-6043")));
 
-        if (homePage.isDisplayed()) {
+        if (isSiteLoaded(driver)) {
             System.out.println("Home Page Is Loaded");
         } else {
             System.out.println("Home Page Failed To Load");
