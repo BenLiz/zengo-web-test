@@ -59,6 +59,7 @@ public class TestWeb {
             System.out.println("You Were Redirected To Free Bitcoin!");
         } else {
             System.out.println("You Were Not Redirected");
+            driver.quit();
         }
 
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@class='cretive-button-text']")))).click();
